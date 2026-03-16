@@ -33,6 +33,7 @@
   </header>
 
   <!-- MOBILE NAV -->
+  <!-- FIX: removed duplicate X — only mobileClose button handles closing -->
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-nav__close" id="mobileClose" aria-label="Close">
       <i class="fas fa-times"></i>
@@ -220,15 +221,18 @@
   <section class="about" id="about">
     <div class="container">
       <div class="about__grid">
+
+        <!-- FIX: real image with proper path (no leading space) -->
         <div class="about__img-wrap">
-  <div class="about__img-box">
-    <img src="assets/kaizey.jpg" alt="Kaizey" />
-  </div>
+          <div class="about__img-box">
+            <img src="assets/kaizey.jpg" alt="Kaizey" />
+          </div>
           <div class="about__badge">
             <div class="about__badge-num">3+</div>
             <div class="about__badge-label">Years coding</div>
           </div>
         </div>
+
         <div class="about__text">
           <span class="section-label">About Me</span>
           <h2 class="section-title">Passionate about code &amp; craft</h2>
@@ -244,6 +248,7 @@
           </div>
           <a href="#contact" class="btn-primary btn-about">Get in touch <i class="fas fa-arrow-right"></i></a>
         </div>
+
       </div>
     </div>
   </section>
@@ -378,7 +383,7 @@
     </div>
   </section>
 
-   <!-- PROJECTS -->
+  <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="container">
       <div class="projects__header">
@@ -386,85 +391,86 @@
           <span class="section-label">Featured Work</span>
           <h2 class="section-title">Things I've built</h2>
         </div>
-        <a href="#" class="btn-outline">All projects <i class="fas fa-arrow-right"></i></a>
+        <a href="projects.html" class="btn-outline">All projects <i class="fas fa-arrow-right"></i></a>
       </div>
- 
+
       <div class="projects__grid">
- 
+
+        <!-- FIX: removed leading space from src=" assets/..." -->
         <div class="project-card" data-num="01">
           <div class="project-img">
-            <img src=" assets/project-1.jpg" alt="DEONE CREATIVITY" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <span class="project-img__fallback">&#128722;</span>
+            <img src="assets/project-1.jpg" alt="DEONE CREATIVITY" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="project-img__fallback">&#128640;</span>
             <div class="project-img__overlay"></div>
             <div class="project-img__hover">VIEW PROJECT &#8594;</div>
           </div>
           <div class="project-body">
             <span class="project-tag"><i class="fas fa-star"></i> Featured</span>
             <h3 class="project-title">DEONE CREATIVITY</h3>
-            <p class="project-desc">Building Digital Products & Automation Systems</p>
+            <p class="project-desc">Building Digital Products &amp; Automation Systems</p>
             <div class="project-stack">
               <span class="stack-tag">Next.js</span>
               <span class="stack-tag">Node.js</span>
               <span class="stack-tag">Stripe</span>
             </div>
             <div class="project-links">
-              <a href="https://deone-creativity.vercel.app/" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="https://github.com/subscript0/Deone-Creativity.git" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://deone-creativity.vercel.app/" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0/Deone-Creativity.git" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
- 
+
         <div class="project-card" data-num="02">
           <div class="project-img">
-            <img src="assets/project-2.jpg" alt="Kettle Yu's personal portfolio website." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <span class="project-img__fallback">&#128172;</span>
+            <img src="assets/project-2.jpg" alt="Kettle Yu Portfolio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="project-img__fallback">&#127760;</span>
             <div class="project-img__overlay"></div>
             <div class="project-img__hover">VIEW PROJECT &#8594;</div>
           </div>
           <div class="project-body">
             <span class="project-tag">Full Stack</span>
-            <h3 class="project-title">Kettle Yu's personal portfolio website.</h3>
+            <h3 class="project-title">Kettle Yu Portfolio</h3>
             <p class="project-desc">A portfolio site for a Digital Creative Designer — used to showcase his work, skills, and get hired or contacted.</p>
             <div class="project-stack">
-              <span class="stack-tag">React</span>
-              <span class="stack-tag">Socket.io</span>
-              <span class="stack-tag">MongoDB</span>
+              <span class="stack-tag">HTML</span>
+              <span class="stack-tag">CSS</span>
+              <span class="stack-tag">JavaScript</span>
             </div>
             <div class="project-links">
-              <a href="https://subscript0.github.io/Kettle-Yu/" class="project-link project-link--filled">Live Demo</a>
-              <a href="https://github.com/subscript0/Kettle-Yu.git" class="project-link">GitHub</a>
+              <a href="https://subscript0.github.io/Kettle-Yu/" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0/Kettle-Yu.git" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
- 
+
         <div class="project-card" data-num="03">
           <div class="project-img">
-            <img src="assets/project-3.jpg" alt="Analytics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <img src="assets/project-3.jpg" alt="NexMetrics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
             <span class="project-img__fallback">&#128202;</span>
             <div class="project-img__overlay"></div>
             <div class="project-img__hover">VIEW PROJECT &#8594;</div>
           </div>
           <div class="project-body">
             <span class="project-tag">Frontend</span>
-            <h3 class="project-title">Analytics Dashboard</h3>
+            <h3 class="project-title">NexMetrics Dashboard</h3>
             <p class="project-desc">Data visualization dashboard aggregating metrics from multiple APIs with custom interactive chart components.</p>
             <div class="project-stack">
               <span class="stack-tag">Vue.js</span>
-              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Chart.js</span>
               <span class="stack-tag">FastAPI</span>
             </div>
             <div class="project-links">
-              <a href="#" class="project-link project-link--filled">Live Demo</a>
-              <a href="#" class="project-link">GitHub</a>
+              <a href="nexmetrics-dashboard.html" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </section>
 
-  <!-- CONNECT — Terminal Transmission -->
+  <!-- CONNECT -->
   <section class="connect" id="contact">
 
     <div class="connect__bg">
@@ -532,11 +538,11 @@
             </div>
           </div>
           <div class="channel-card__label">GITHUB</div>
-          <div class="channel-card__handle">@kaizey</div>
+          <div class="channel-card__handle">@subscript0</div>
           <div class="channel-card__action">View repos <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
 
-               <a href="https://wa.me/2349117564724" target="_blank" class="channel-card">
+        <a href="https://wa.me/2349117564724" target="_blank" class="channel-card">
           <div class="channel-card__glow"></div>
           <div class="channel-card__top">
             <div class="channel-card__icon"><i class="fab fa-whatsapp"></i></div>
@@ -558,7 +564,7 @@
             </div>
           </div>
           <div class="channel-card__label">TWITTER / X</div>
-          <div class="channel-card__handle">@kaizey</div>
+          <div class="channel-card__handle">@Indexter_1</div>
           <div class="channel-card__action">Follow <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
 
