@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaizey — Full Stack Developer</title>
+  <meta name="description" content="Full Stack Developer building clean, scalable web applications." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header__pill" id="headerPill">
+      <a href="#home" class="header__logo">Kaizey<span>.</span></a>
+      <nav class="header__nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="header__cta">Hire Me</a>
+      </nav>
+      <button class="ham-btn" id="hamBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav__close" id="mobileClose" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="#about"    onclick="closeMobileNav()">About</a>
+    <a href="#skills"   onclick="closeMobileNav()">Skills</a>
+    <a href="#projects" onclick="closeMobileNav()">Projects</a>
+    <a href="#contact"  onclick="closeMobileNav()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero__grid">
+
+        <div class="hero__content">
+          <div class="hero__eyebrow">
+            <span class="eyebrow__dot"></span>
+            Available for work
+          </div>
+          <h1 class="hero__heading">
+            <div class="line"><span>Building things</span></div>
+            <div class="line"><span>for the <em class="accent">web.</em></span></div>
+          </h1>
+          <div class="hero__stats">
+            <div class="stat">
+              <div class="stat__num">3<span>+</span></div>
+              <div class="stat__label">Years exp.</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">13<span>+</span></div>
+              <div class="stat__label">Projects done</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">12<span>+</span></div>
+              <div class="stat__label">Happy clients</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="vscode">
+            <div class="vscode__titlebar">
+              <div class="vscode__dots">
+                <span class="vscode__dot vscode__dot--red"></span>
+                <span class="vscode__dot vscode__dot--yellow"></span>
+                <span class="vscode__dot vscode__dot--green"></span>
+              </div>
+              <div class="vscode__tabs">
+                <div class="vscode__tab vscode__tab--active">
+                  <i class="devicon-javascript-plain" style="color:#f0db4f;font-size:1.3rem;"></i>
+                  developer.js
+                </div>
+                <div class="vscode__tab">
+                  <i class="devicon-react-original" style="color:#61dafb;font-size:1.3rem;"></i>
+                  App.jsx
+                </div>
+              </div>
+              <div class="vscode__winbtns">
+                <span>─</span><span>□</span><span>✕</span>
+              </div>
+            </div>
+
+            <div class="vscode__body">
+              <div class="vscode__activitybar">
+                <i class="fas fa-copy vscode__actbar-icon vscode__actbar-icon--active"></i>
+                <i class="fas fa-search vscode__actbar-icon"></i>
+                <i class="fas fa-code-branch vscode__actbar-icon"></i>
+                <i class="fas fa-bug vscode__actbar-icon"></i>
+                <i class="fas fa-puzzle-piece vscode__actbar-icon"></i>
+              </div>
+
+              <div class="vscode__explorer">
+                <div class="vscode__explorer-title">EXPLORER</div>
+                <div class="vscode__file-tree">
+                  <div class="vscode__folder">
+                    <i class="fas fa-chevron-down vscode__chevron"></i>
+                    <i class="fas fa-folder-open" style="color:#e8c37b;font-size:1.3rem;"></i>
+                    <span>kaizey-dev</span>
+                  </div>
+                  <div class="vscode__file vscode__file--active">
+                    <i class="devicon-javascript-plain" style="color:#f0db4f;font-size:1.3rem;"></i>
+                    developer.js
+                  </div>
+                  <div class="vscode__file">
+                    <i class="devicon-react-original" style="color:#61dafb;font-size:1.3rem;"></i>
+                    App.jsx
+                  </div>
+                  <div class="vscode__file">
+                    <i class="devicon-css3-plain" style="color:#264de4;font-size:1.3rem;"></i>
+                    style.css
+                  </div>
+                  <div class="vscode__file">
+                    <i class="devicon-nodejs-plain" style="color:#68a063;font-size:1.3rem;"></i>
+                    server.js
+                  </div>
+                  <div class="vscode__file">
+                    <i class="fas fa-cog" style="color:#6d8086;font-size:1.2rem;"></i>
+                    package.json
+                  </div>
+                </div>
+              </div>
+
+              <div class="vscode__editor">
+                <div class="vscode__code-wrap">
+                  <div class="vscode__gutter">
+                    <span>1</span><span>2</span><span>3</span><span>4</span>
+                    <span>5</span><span>6</span><span>7</span><span>8</span>
+                    <span>9</span><span>10</span><span>11</span><span>12</span>
+                    <span>13</span><span>14</span>
+                  </div>
+                  <div class="vscode__lines">
+                    <div class="vscode__line"><span class="vc-comment">// ✦ open to new opportunities</span></div>
+                    <div class="vscode__line vscode__line--blank">&nbsp;</div>
+                    <div class="vscode__line"><span class="vc-keyword">const</span> <span class="vc-func">developer</span> <span class="vc-op">=</span> <span class="vc-muted">{</span></div>
+                    <div class="vscode__line vscode__line--hl-name">
+                      <span class="vc-indent"></span><span class="vc-prop">name</span><span class="vc-op">:</span> <span class="vc-string">"Kaizey"</span><span class="vc-muted">,</span>
+                    </div>
+                    <div class="vscode__line">
+                      <span class="vc-indent"></span><span class="vc-prop">role</span><span class="vc-op">:</span> <span class="vc-string">"Full Stack Dev"</span><span class="vc-muted">,</span>
+                    </div>
+                    <div class="vscode__line">
+                      <span class="vc-indent"></span><span class="vc-prop">stack</span><span class="vc-op">:</span> <span class="vc-muted">[</span><span class="vc-string">"React"</span><span class="vc-muted">, </span><span class="vc-string">"Node"</span><span class="vc-muted">, </span><span class="vc-string">"JS"</span><span class="vc-muted">],</span>
+                    </div>
+                    <div class="vscode__line vscode__line--hl-avail">
+                      <span class="vc-indent"></span><span class="vc-prop">available</span><span class="vc-op">:</span> <span class="vc-bool">true</span><span class="vc-muted">,</span>
+                    </div>
+                    <div class="vscode__line">
+                      <span class="vc-indent"></span><span class="vc-func">hire</span><span class="vc-muted">:</span> <span class="vc-op">()</span> <span class="vc-keyword">=&gt;</span> <span class="vc-muted">{</span>
+                    </div>
+                    <div class="vscode__line">
+                      <span class="vc-indent2"></span><span class="vc-keyword">return</span> <span class="vc-string">"Let's build together!"</span>
+                    </div>
+                    <div class="vscode__line"><span class="vc-indent"></span><span class="vc-muted">}</span></div>
+                    <div class="vscode__line"><span class="vc-muted">};</span></div>
+                    <div class="vscode__line vscode__line--blank">&nbsp;</div>
+                    <div class="vscode__line">
+                      <span class="vc-var">developer</span><span class="vc-muted">.</span><span class="vc-func">hire</span><span class="vc-muted">();</span>
+                    </div>
+                    <div class="vscode__line vscode__line--cursor"><span class="vc-cursor"></span></div>
+                  </div>
+                </div>
+
+                <div class="vscode__terminal">
+                  <div class="vscode__terminal-tabs">
+                    <span class="vt-tab vt-tab--active">TERMINAL</span>
+                    <span class="vt-tab">OUTPUT</span>
+                    <span class="vt-tab">PROBLEMS</span>
+                  </div>
+                  <div class="vscode__terminal-body">
+                    <div class="vt-line">
+                      <span class="vt-path">~/kaizey-dev</span><span class="vt-dollar"> $&nbsp;</span><span class="vt-cmd">node developer.js</span>
+                    </div>
+                    <div class="vt-line">
+                      <span class="vt-output">"Let's build together!"</span>
+                    </div>
+                    <div class="vt-line">
+                      <span class="vt-path">~/kaizey-dev</span><span class="vt-dollar"> $&nbsp;</span><span class="vt-blink">▋</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vscode__statusbar">
+              <div class="vscode__status-left">
+                <span><i class="fas fa-code-branch"></i>&nbsp;main</span>
+                <span><i class="fas fa-times-circle" style="color:#f14c4c;"></i>&nbsp;0</span>
+                <span><i class="fas fa-exclamation-triangle" style="color:#cca700;"></i>&nbsp;0</span>
+              </div>
+              <div class="vscode__status-right">
+                <span>JavaScript</span>
+                <span>UTF-8</span>
+                <span>Ln 13, Col 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__img-wrap">
+          <div class="about__img-box">👨‍💻</div>
+          <div class="about__badge">
+            <div class="about__badge-num">3+</div>
+            <div class="about__badge-label">Years coding</div>
+          </div>
+        </div>
+        <div class="about__text">
+          <span class="section-label">About Me</span>
+          <h2 class="section-title">Passionate about code &amp; craft</h2>
+          <p>I'm a <strong>Full Stack Developer</strong> who loves building products that are both technically solid and a pleasure to use. I care deeply about clean code, good architecture, and the details that make an interface feel just right.</p>
+          <p>When I'm not building, I'm learning — currently exploring <strong>system design</strong>, <strong>cloud infrastructure</strong>, and <strong>open source</strong> contributions.</p>
+          <div class="about__highlights">
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> Clean, maintainable code</div>
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> REST &amp; GraphQL APIs</div>
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> Database design</div>
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> CI/CD pipelines</div>
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> Responsive UIs</div>
+            <div class="highlight-item"><i class="fas fa-check-circle"></i> Performance tuning</div>
+          </div>
+          <a href="#contact" class="btn-primary btn-about">Get in touch <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="skills__header">
+        <span class="section-label">Tech Stack</span>
+        <h2 class="section-title">Tools I work with</h2>
+        <p class="section-sub">Technologies I use to bring ideas to life — from frontend to backend.</p>
+      </div>
+
+      <div class="skills__categories">
+        <button class="cat-btn active" onclick="filterSkills('all', this)">All</button>
+        <button class="cat-btn" onclick="filterSkills('frontend', this)">Frontend</button>
+        <button class="cat-btn" onclick="filterSkills('backend', this)">Backend</button>
+      </div>
+
+      <div class="anime-skills">
+        <div class="anime-skills__label">
+          <span class="anime-skills__tag">POWER LEVELS</span>
+          <span class="anime-skills__sub">— Kaizey's jutsu scrolls unlocked —</span>
+        </div>
+
+        <div class="skills__grid" id="skillsGrid">
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-react-original colored"></i></div>
+            <span class="skill-name">React</span>
+            <span class="skill-level">Advanced</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-typescript-plain colored"></i></div>
+            <span class="skill-name">TypeScript</span>
+            <span class="skill-level">Advanced</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div>
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-level">Expert</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-nextjs-plain"></i></div>
+            <span class="skill-name">Next.js</span>
+            <span class="skill-level">Advanced</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-css3-plain colored"></i></div>
+            <span class="skill-name">CSS3</span>
+            <span class="skill-level">Expert</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-tailwindcss-plain colored"></i></div>
+            <span class="skill-name">Tailwind</span>
+            <span class="skill-level">Expert</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-vuejs-plain colored"></i></div>
+            <span class="skill-name">Vue.js</span>
+            <span class="skill-level">Intermediate</span>
+          </div>
+          <div class="skill-card" data-cat="frontend">
+            <div class="skill-icon"><i class="devicon-html5-plain colored"></i></div>
+            <span class="skill-name">HTML5</span>
+            <span class="skill-level">Expert</span>
+          </div>
+          <div class="skill-card" data-cat="backend">
+            <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
+            <span class="skill-name">Node.js</span>
+            <span class="skill-level">Advanced</span>
+          </div>
+          <div class="skill-card" data-cat="backend">
+            <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
+            <span class="skill-name">Python</span>
+            <span class="skill-level">Intermediate</span>
+          </div>
+          <div class="skill-card" data-cat="backend">
+            <div class="skill-icon"><i class="devicon-git-plain colored"></i></div>
+            <span class="skill-name">Git</span>
+            <span class="skill-level">Expert</span>
+          </div>
+          <div class="skill-card" data-cat="backend">
+            <div class="skill-icon"><i class="devicon-github-original"></i></div>
+            <span class="skill-name">GitHub</span>
+            <span class="skill-level">Expert</span>
+          </div>
+        </div>
+
+        <div class="anime-bars">
+          <div class="anime-bar-item">
+            <div class="anime-bar__info">
+              <span class="anime-bar__name">&#9889; Frontend Mastery</span>
+              <span class="anime-bar__rank anime-bar__rank--s">S-RANK</span>
+              <span class="anime-bar__pct">92%</span>
+            </div>
+            <div class="anime-bar__track">
+              <div class="anime-bar__fill anime-bar__fill--s" data-w="0.92"></div>
+            </div>
+          </div>
+          <div class="anime-bar-item">
+            <div class="anime-bar__info">
+              <span class="anime-bar__name">&#128293; Backend Jutsu</span>
+              <span class="anime-bar__rank anime-bar__rank--a">A-RANK</span>
+              <span class="anime-bar__pct">78%</span>
+            </div>
+            <div class="anime-bar__track">
+              <div class="anime-bar__fill anime-bar__fill--a" data-w="0.78"></div>
+            </div>
+          </div>
+          <div class="anime-bar-item">
+            <div class="anime-bar__info">
+              <span class="anime-bar__name">&#128187; UI/UX Chakra</span>
+              <span class="anime-bar__rank anime-bar__rank--s">S-RANK</span>
+              <span class="anime-bar__pct">88%</span>
+            </div>
+            <div class="anime-bar__track">
+              <div class="anime-bar__fill anime-bar__fill--s" data-w="0.88"></div>
+            </div>
+          </div>
+          <div class="anime-bar-item">
+            <div class="anime-bar__info">
+              <span class="anime-bar__name">&#127760; Problem Solving</span>
+              <span class="anime-bar__rank anime-bar__rank--a">A-RANK</span>
+              <span class="anime-bar__pct">82%</span>
+            </div>
+            <div class="anime-bar__track">
+              <div class="anime-bar__fill anime-bar__fill--a" data-w="0.82"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="projects__header">
+        <div>
+          <span class="section-label">Featured Work</span>
+          <h2 class="section-title">Things I've built</h2>
+        </div>
+        <a href="#" class="btn-outline">All projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+ 
+      <div class="projects__grid">
+ 
+        <div class="project-card" data-num="01">
+          <div class="project-img">
+            <img src=" assets/project-1.jpg" alt="DEONE CREATIVITY" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="project-img__fallback">&#128722;</span>
+            <div class="project-img__overlay"></div>
+            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag"><i class="fas fa-star"></i> Featured</span>
+            <h3 class="project-title">DEONE CREATIVITY</h3>
+            <p class="project-desc">Building Digital Products & Automation Systems</p>
+            <div class="project-stack">
+              <span class="stack-tag">Next.js</span>
+              <span class="stack-tag">Node.js</span>
+              <span class="stack-tag">Stripe</span>
+            </div>
+            <div class="project-links">
+              <a href="https://deone-creativity.vercel.app/" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0/Deone-Creativity.git" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="project-card" data-num="02">
+          <div class="project-img">
+            <img src="assets/project-2.jpg" alt="Kettle Yu's personal portfolio website." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="project-img__fallback">&#128172;</span>
+            <div class="project-img__overlay"></div>
+            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Full Stack</span>
+            <h3 class="project-title">Kettle Yu's personal portfolio website.</h3>
+            <p class="project-desc">A portfolio site for a Digital Creative Designer — used to showcase his work, skills, and get hired or contacted.</p>
+            <div class="project-stack">
+              <span class="stack-tag">React</span>
+              <span class="stack-tag">Socket.io</span>
+              <span class="stack-tag">MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="https://subscript0.github.io/Kettle-Yu/" class="project-link project-link--filled">Live Demo</a>
+              <a href="https://github.com/subscript0/Kettle-Yu.git" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="project-card" data-num="03">
+          <div class="project-img">
+            <img src="assets/project-3.jpg" alt="Analytics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="project-img__fallback">&#128202;</span>
+            <div class="project-img__overlay"></div>
+            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Frontend</span>
+            <h3 class="project-title">Analytics Dashboard</h3>
+            <p class="project-desc">Data visualization dashboard aggregating metrics from multiple APIs with custom interactive chart components.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Vue.js</span>
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">FastAPI</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link project-link--filled">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT — Terminal Transmission -->
+  <section class="connect" id="contact">
+
+    <div class="connect__bg">
+      <div class="connect__bg-grid"></div>
+      <div class="connect__bg-glow connect__bg-glow--left"></div>
+      <div class="connect__bg-glow connect__bg-glow--right"></div>
+    </div>
+
+    <div class="container connect__container">
+
+      <div class="connect__header">
+        <div class="connect__header-left">
+          <div class="connect__status-bar">
+            <span class="connect__status-dot"></span>
+            <span class="connect__status-text">SIGNAL ACTIVE &#8212; OPEN CHANNEL</span>
+          </div>
+          <h2 class="connect__title">
+            Initiate <span class="accent">transmission.</span>
+          </h2>
+          <p class="connect__sub">
+            Got a project, collab, or just want to talk code? Pick a channel
+            and send the signal &#8212; I respond fast.
+          </p>
+        </div>
+        <div class="connect__header-right">
+          <div class="connect__terminal-badge">
+            <span class="connect__term-line">
+              <span class="vt-path">kaizey@dev</span>
+              <span class="vt-dollar">&nbsp;~&nbsp;$&nbsp;</span>
+              <span class="vt-cmd">status --available</span>
+            </span>
+            <span class="connect__term-line connect__term-output">
+              &#10004; ready for new missions
+            </span>
+            <span class="connect__term-line">
+              <span class="vt-path">kaizey@dev</span>
+              <span class="vt-dollar">&nbsp;~&nbsp;$&nbsp;</span>
+              <span class="vt-blink">&#9611;</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="connect__channels">
+
+        <a href="mailto:chiemeried321@gmail.com" class="channel-card">
+          <div class="channel-card__glow"></div>
+          <div class="channel-card__top">
+            <div class="channel-card__icon"><i class="fas fa-envelope"></i></div>
+            <div class="channel-card__signal">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="channel-card__label">EMAIL</div>
+          <div class="channel-card__handle">chiemeried321@gmail.com</div>
+          <div class="channel-card__action">Send mail <i class="fas fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+        <a href="https://github.com/subscript0" target="_blank" class="channel-card">
+          <div class="channel-card__glow"></div>
+          <div class="channel-card__top">
+            <div class="channel-card__icon"><i class="fab fa-github"></i></div>
+            <div class="channel-card__signal">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="channel-card__label">GITHUB</div>
+          <div class="channel-card__handle">@kaizey</div>
+          <div class="channel-card__action">View repos <i class="fas fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+               <a href="https://wa.me/2349117564724" target="_blank" class="channel-card">
+          <div class="channel-card__glow"></div>
+          <div class="channel-card__top">
+            <div class="channel-card__icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="channel-card__signal">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="channel-card__label">WHATSAPP</div>
+          <div class="channel-card__handle">+234 911 756 4724</div>
+          <div class="channel-card__action">Message me <i class="fas fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+        <a href="https://x.com/Indexter_1" target="_blank" class="channel-card">
+          <div class="channel-card__glow"></div>
+          <div class="channel-card__top">
+            <div class="channel-card__icon"><i class="fab fa-x-twitter"></i></div>
+            <div class="channel-card__signal">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="channel-card__label">TWITTER / X</div>
+          <div class="channel-card__handle">@kaizey</div>
+          <div class="channel-card__action">Follow <i class="fas fa-arrow-up-right-from-square"></i></div>
+        </a>
+
+      </div>
+
+      <div class="connect__form-wrap">
+        <div class="connect__form-label">
+          <span class="connect__form-tag">// DIRECT TRANSMISSION</span>
+        </div>
+
+        <div class="connect__form">
+          <div class="connect__form-row">
+            <div class="connect__field">
+              <label class="connect__field-label" for="c-name">
+                <span class="connect__field-num">01</span> YOUR NAME
+              </label>
+              <div class="connect__field-wrap">
+                <input id="c-name" type="text" placeholder="What do they call you?" />
+                <div class="connect__field-line"></div>
+              </div>
+            </div>
+            <div class="connect__field">
+              <label class="connect__field-label" for="c-email">
+                <span class="connect__field-num">02</span> YOUR EMAIL
+              </label>
+              <div class="connect__field-wrap">
+                <input id="c-email" type="email" placeholder="Reply channel address" />
+                <div class="connect__field-line"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="connect__field">
+            <label class="connect__field-label" for="c-subject">
+              <span class="connect__field-num">03</span> SUBJECT
+            </label>
+            <div class="connect__field-wrap">
+              <input id="c-subject" type="text" placeholder="What's the mission?" />
+              <div class="connect__field-line"></div>
+            </div>
+          </div>
+
+          <div class="connect__field">
+            <label class="connect__field-label" for="c-message">
+              <span class="connect__field-num">04</span> MESSAGE
+            </label>
+            <div class="connect__field-wrap">
+              <textarea id="c-message" placeholder="Describe your project, idea, or just say hey..."></textarea>
+              <div class="connect__field-line"></div>
+            </div>
+          </div>
+
+          <div class="connect__form-footer">
+            <div class="connect__form-note">
+              <i class="fas fa-shield-halved"></i>
+              Encrypted. No spam. Ever.
+            </div>
+            <button class="connect__send-btn" id="sendBtn">
+              <span class="connect__send-btn-text">
+                Transmit <i class="fas fa-satellite-dish"></i>
+              </span>
+              <div class="connect__send-btn-bg"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">Kaizey<span>.</span></div>
+        <div class="footer__links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <p class="footer__copy">&copy; <span id="year"></span> Kaizey. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
