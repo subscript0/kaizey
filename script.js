@@ -171,11 +171,7 @@ function filterSkills(cat, btn) {
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.skill-level').forEach(el => {
-    el.setAttribute('data-rank', el.textContent.trim());
-  });
-});
+/* Skill cards visible immediately — no observer needed */
 
 
 /* ═══════════════════════════════════════════════════════
@@ -198,36 +194,7 @@ const animeBarObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.anime-bar__fill').forEach(el => animeBarObserver.observe(el));
 
 
-/* ═══════════════════════════════════════════════════════
-   SCROLL REVEAL
-   FIX: removed multiple IntersectionObservers — merged
-   into one to reduce overhead.
-═══════════════════════════════════════════════════════ */
-const revealEls = document.querySelectorAll(
-  '.skill-card, .project-card, .anime-bar-item, .about__img-wrap, .about__text, .channel-card'
-);
-
-revealEls.forEach(el => {
-  el.style.opacity   = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-});
-
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach((entry, i) => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const isSkill = el.classList.contains('skill-card');
-    setTimeout(() => {
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-      if (isSkill) el.classList.add('anime-entered');
-    }, (i % 6) * 55);
-    revealObserver.unobserve(el);
-  });
-}, { threshold: 0.08 });
-
-revealEls.forEach(el => revealObserver.observe(el));
+/* Scroll reveal removed — everything loads visible immediately */
 
 
 /* ═══════════════════════════════════════════════════════
