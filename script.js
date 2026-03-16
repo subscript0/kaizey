@@ -1,64 +1,62 @@
 /* ═══════════════════════════════════════════════════════
-   KAIZEY — script.js
+   KAIZEY — script.js  (performance-optimised)
 ═══════════════════════════════════════════════════════ */
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
 
 /* ═══════════════════════════════════════════════════════
-   BLINKING PARTICLE CANVAS
-   Mix of white + orange dots at varying speeds/sizes
-   Some blink fast, some slow — like stars + fireflies
+   PARTICLE CANVAS
+   FIX: removed shadowBlur — it forces GPU layer flush
+   every single frame and is the #1 cause of canvas lag.
+   Particles now draw as plain filled circles only.
 ═══════════════════════════════════════════════════════ */
 (function initParticles() {
   const canvas = document.getElementById('particleCanvas');
-  const ctx    = canvas.getContext('2d');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-  let W, H, particles;
+  let W, H, particles, rafId;
 
   function resize() {
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  function randomBetween(a, b) { return a + Math.random() * (b - a); }
+  function rand(a, b) { return a + Math.random() * (b - a); }
 
   function createParticles() {
-    const count = Math.floor((W * H) / 8000); // density responsive
+    /* Cap at 120 max — on large screens density formula
+       would create 300+ particles which tanks performance */
+    const count = Math.min(Math.floor((W * H) / 12000), 120);
     particles = [];
     for (let i = 0; i < count; i++) {
-      // Mix of white + orange particles (80% white, 20% orange)
-      const isOrange = Math.random() < 0.20;
+      const isOrange = Math.random() < 0.18;
       particles.push({
-        x:        randomBetween(0, W),
-        y:        randomBetween(0, H),
-        r:        randomBetween(0.4, isOrange ? 2.2 : 1.4),
-        // base opacity
-        opacity:  randomBetween(0.15, 0.75),
-        // current rendered opacity (animated)
-        alpha:    randomBetween(0.1, 0.7),
-        // blink speed — fast (firefly) or slow (star)
-        speed:    randomBetween(0.003, isOrange ? 0.022 : 0.010),
-        // each particle has its own phase offset
-        phase:    randomBetween(0, Math.PI * 2),
+        x: rand(0, W), y: rand(0, H),
+        r: rand(0.4, isOrange ? 1.8 : 1.2),
+        opacity: rand(0.12, 0.65),
+        alpha: rand(0.1, 0.6),
+        speed: rand(0.003, isOrange ? 0.018 : 0.009),
+        phase: rand(0, Math.PI * 2),
         isOrange,
-        // subtle drift
-        dx: randomBetween(-0.06, 0.06),
-        dy: randomBetween(-0.04, 0.04),
+        dx: rand(-0.05, 0.05),
+        dy: rand(-0.04, 0.04),
       });
     }
   }
 
+  /* Pre-build colour strings so we don't allocate strings inside the loop */
   let frame = 0;
   function animate() {
+    rafId = requestAnimationFrame(animate);
     ctx.clearRect(0, 0, W, H);
     frame++;
 
+    /* NO shadowBlur — removed entirely. It was causing a full
+       compositing layer flush on every frame = the lag you felt. */
     for (const p of particles) {
-      // Blink: sine wave on alpha
       p.alpha = p.opacity * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(frame * p.speed + p.phase)));
-
-      // Slow drift
       p.x += p.dx;
       p.y += p.dy;
       if (p.x < 0) p.x = W;
@@ -66,58 +64,52 @@ document.getElementById('year').textContent = new Date().getFullYear();
       if (p.y < 0) p.y = H;
       if (p.y > H) p.y = 0;
 
-      // Draw
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      if (p.isOrange) {
-        ctx.fillStyle = `rgba(255, 122, 0, ${p.alpha})`;
-        // tiny glow for orange ones
-        ctx.shadowBlur  = 6;
-        ctx.shadowColor = `rgba(255,122,0,${p.alpha * 0.6})`;
-      } else {
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-        ctx.shadowBlur  = 0;
-      }
+      ctx.fillStyle = p.isOrange
+        ? `rgba(255,122,0,${p.alpha.toFixed(2)})`
+        : `rgba(255,255,255,${p.alpha.toFixed(2)})`;
       ctx.fill();
     }
-    ctx.shadowBlur = 0;
-
-    requestAnimationFrame(animate);
   }
 
   resize();
   createParticles();
   animate();
 
+  /* Debounce resize so it doesn't fire 30x while dragging */
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    resize();
-    createParticles();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      cancelAnimationFrame(rafId);
+      resize();
+      createParticles();
+      animate();
+    }, 150);
   });
 })();
 
 
 /* ═══════════════════════════════════════════════════════
-   DYNAMIC GLASS HEADER — smooth scroll-driven transitions
+   DYNAMIC GLASS HEADER
 ═══════════════════════════════════════════════════════ */
 const header     = document.getElementById('header');
 const headerPill = document.getElementById('headerPill');
 const THRESHOLD  = 40;
 
 function updateHeader() {
-  const scrollY   = window.scrollY;
-  const progress  = Math.min(scrollY / THRESHOLD, 1);
-
+  const scrollY  = window.scrollY;
+  const progress = Math.min(scrollY / THRESHOLD, 1);
   header.classList.toggle('scrolled', scrollY > THRESHOLD);
-
-  const blur   = (progress * 20).toFixed(1);
-  const bgA    = (progress * 0.60).toFixed(3);
-  const bdA    = (progress * 0.12).toFixed(3);
-  const shadowA= (progress * 0.45).toFixed(2);
-
+  const blur    = (progress * 20).toFixed(1);
+  const bgA     = (progress * 0.60).toFixed(3);
+  const bdA     = (progress * 0.12).toFixed(3);
+  const shadowA = (progress * 0.45).toFixed(2);
   headerPill.style.backdropFilter       = `blur(${blur}px)`;
   headerPill.style.webkitBackdropFilter = `blur(${blur}px)`;
-  headerPill.style.background           = `rgba(13, 16, 32, ${bgA})`;
-  headerPill.style.borderColor          = `rgba(255, 255, 255, ${bdA})`;
+  headerPill.style.background           = `rgba(13,16,32,${bgA})`;
+  headerPill.style.borderColor          = `rgba(255,255,255,${bdA})`;
   headerPill.style.boxShadow            = progress > 0.05
     ? `0 8px 32px rgba(0,0,10,${shadowA}), inset 0 1px 0 rgba(255,255,255,${(progress*0.06).toFixed(3)})`
     : 'none';
@@ -128,20 +120,29 @@ updateHeader();
 
 /* ═══════════════════════════════════════════════════════
    HAMBURGER / MOBILE NAV
+   FIX: hide ham-btn when mobile nav is open so the
+   animated X spans don't show alongside the close button.
 ═══════════════════════════════════════════════════════ */
-const hamBtn     = document.getElementById('hamBtn');
-const mobileNav  = document.getElementById('mobileNav');
-const mobileClose= document.getElementById('mobileClose');
+const hamBtn    = document.getElementById('hamBtn');
+const mobileNav = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileClose');
+
+function openMobileNav() {
+  mobileNav.classList.add('open');
+  hamBtn.classList.add('open');
+  hamBtn.style.visibility = 'hidden'; /* hide ham-btn — close btn takes over */
+  document.body.style.overflow = 'hidden';
+}
 
 function closeMobileNav() {
-  hamBtn.classList.remove('open');
   mobileNav.classList.remove('open');
+  hamBtn.classList.remove('open');
+  hamBtn.style.visibility = 'visible';
   document.body.style.overflow = '';
 }
+
 hamBtn.addEventListener('click', () => {
-  const isOpen = mobileNav.classList.toggle('open');
-  hamBtn.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
 });
 mobileClose?.addEventListener('click', closeMobileNav);
 mobileNav.addEventListener('click', e => { if (e.target === mobileNav) closeMobileNav(); });
@@ -149,33 +150,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileN
 
 
 /* ═══════════════════════════════════════════════════════
-   SKILLS FILTER — with anime pop entrance
+   SKILLS FILTER
 ═══════════════════════════════════════════════════════ */
 function filterSkills(cat, btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-
   let delay = 0;
   document.querySelectorAll('.skill-card').forEach(card => {
     const visible = cat === 'all' || card.dataset.cat === cat;
     if (visible) {
       card.style.display = 'flex';
       card.classList.remove('anime-entered');
-      setTimeout(() => {
-        card.classList.add('anime-entered');
-      }, delay);
+      setTimeout(() => card.classList.add('anime-entered'), delay);
       delay += 40;
     } else {
-      card.style.opacity = '0';
+      card.style.opacity   = '0';
       card.style.transform = 'scale(0.8)';
       setTimeout(() => { card.style.display = 'none'; }, 200);
     }
   });
 }
 
-/* Anime-pop entrance on initial load */
 window.addEventListener('DOMContentLoaded', () => {
-  // Tag rank labels on skill levels
   document.querySelectorAll('.skill-level').forEach(el => {
     el.setAttribute('data-rank', el.textContent.trim());
   });
@@ -183,80 +179,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 /* ═══════════════════════════════════════════════════════
-   ANIME POWER BARS — animate on scroll into view
+   ANIME POWER BARS
 ═══════════════════════════════════════════════════════ */
 const animeBarObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const fill = entry.target;
-      const w    = parseFloat(fill.getAttribute('data-w')) || 0;
-      // Stagger: each bar animates in sequence
-      const idx  = fill.closest('.anime-bar-item')
-                       ?.parentElement
-                       ?.querySelectorAll('.anime-bar-item') ?? [];
-      let delay = 0;
-      if (idx.length) {
-        const arr = Array.from(idx);
-        delay = arr.indexOf(fill.closest('.anime-bar-item')) * 180;
-      }
-      setTimeout(() => {
-        fill.style.transform = `scaleX(${w})`;
-        fill.classList.add('bar-animated');
-      }, delay);
-      animeBarObserver.unobserve(fill);
-    }
+    if (!entry.isIntersecting) return;
+    const fill = entry.target;
+    const w    = parseFloat(fill.getAttribute('data-w')) || 0;
+    const items = Array.from(fill.closest('.anime-bar-item')?.parentElement?.querySelectorAll('.anime-bar-item') ?? []);
+    const delay = items.indexOf(fill.closest('.anime-bar-item')) * 180;
+    setTimeout(() => {
+      fill.style.transform = `scaleX(${w})`;
+      fill.classList.add('bar-animated');
+    }, delay);
+    animeBarObserver.unobserve(fill);
   });
 }, { threshold: 0.4 });
 document.querySelectorAll('.anime-bar__fill').forEach(el => animeBarObserver.observe(el));
 
 
 /* ═══════════════════════════════════════════════════════
-   SCROLL REVEAL — skill cards anime pop, others fade up
+   SCROLL REVEAL
+   FIX: removed multiple IntersectionObservers — merged
+   into one to reduce overhead.
 ═══════════════════════════════════════════════════════ */
-// Skill cards — anime pop
-const skillCardObserver = new IntersectionObserver(entries => {
+const revealEls = document.querySelectorAll(
+  '.skill-card, .project-card, .anime-bar-item, .about__img-wrap, .about__text, .channel-card'
+);
+
+revealEls.forEach(el => {
+  el.style.opacity   = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+});
+
+const revealObserver = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      const card = entry.target;
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.classList.add('anime-entered');
-      }, (i % 8) * 55);
-      skillCardObserver.unobserve(card);
-    }
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const isSkill = el.classList.contains('skill-card');
+    setTimeout(() => {
+      el.style.opacity   = '1';
+      el.style.transform = 'translateY(0)';
+      if (isSkill) el.classList.add('anime-entered');
+    }, (i % 6) * 55);
+    revealObserver.unobserve(el);
   });
 }, { threshold: 0.08 });
 
-document.querySelectorAll('.skill-card').forEach(el => {
-  el.style.opacity = '0';
-  skillCardObserver.observe(el);
-});
-
-// Other elements — standard fade up
-const fadeSelectors = [
-  '.project-card', '.contact__link-card',
-  '.anime-bar-item', '.about__img-wrap', '.about__text'
-].join(', ');
-
-const fadeEls = document.querySelectorAll(fadeSelectors);
-fadeEls.forEach(el => {
-  el.style.opacity   = '0';
-  el.style.transform = 'translateY(28px)';
-  el.style.transition = 'opacity 0.6s cubic-bezier(0.23,1,0.32,1), transform 0.6s cubic-bezier(0.23,1,0.32,1)';
-});
-
-const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.style.opacity   = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }, (i % 5) * 80);
-      fadeObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.10 });
-fadeEls.forEach(el => fadeObserver.observe(el));
+revealEls.forEach(el => revealObserver.observe(el));
 
 
 /* ═══════════════════════════════════════════════════════
@@ -264,7 +235,9 @@ fadeEls.forEach(el => fadeObserver.observe(el));
 ═══════════════════════════════════════════════════════ */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
+    const id = link.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
     const top = target.getBoundingClientRect().top + window.scrollY - 90;
@@ -274,7 +247,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 
 /* ═══════════════════════════════════════════════════════
-   CONTACT FORM — new connect section IDs
+   CONTACT FORM
 ═══════════════════════════════════════════════════════ */
 const sendBtn = document.getElementById('sendBtn');
 if (sendBtn) {
@@ -282,30 +255,22 @@ if (sendBtn) {
     const name    = document.getElementById('c-name')?.value.trim();
     const email   = document.getElementById('c-email')?.value.trim();
     const message = document.getElementById('c-message')?.value.trim();
+    const textEl  = sendBtn.querySelector('.connect__send-btn-text');
 
     if (!name || !email || !message) {
-      sendBtn.querySelector('.connect__send-btn-text').innerHTML =
-        'Fill all fields ✕';
+      textEl.textContent = 'Fill all fields ✕';
       sendBtn.style.background = '#c0392b';
-      sendBtn.style.boxShadow  = '0 4px 20px rgba(192,57,43,0.4)';
       setTimeout(() => {
-        sendBtn.querySelector('.connect__send-btn-text').innerHTML =
-          'Transmit <i class="fas fa-satellite-dish"></i>';
+        textEl.innerHTML = 'Transmit <i class="fas fa-satellite-dish"></i>';
         sendBtn.style.background = '';
-        sendBtn.style.boxShadow  = '';
       }, 2500);
       return;
     }
-
-    sendBtn.querySelector('.connect__send-btn-text').innerHTML =
-      'Transmission sent! <i class="fas fa-check"></i>';
+    textEl.innerHTML = 'Transmission sent! <i class="fas fa-check"></i>';
     sendBtn.style.background = '#1db954';
-    sendBtn.style.boxShadow  = '0 4px 20px rgba(29,185,84,0.4)';
     setTimeout(() => {
-      sendBtn.querySelector('.connect__send-btn-text').innerHTML =
-        'Transmit <i class="fas fa-satellite-dish"></i>';
+      textEl.innerHTML = 'Transmit <i class="fas fa-satellite-dish"></i>';
       sendBtn.style.background = '';
-      sendBtn.style.boxShadow  = '';
     }, 3500);
   });
 }
