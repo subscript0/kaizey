@@ -26,16 +26,15 @@
         <a href="#projects">Projects</a>
         <a href="#contact" class="header__cta">Hire Me</a>
       </nav>
-      <button class="ham-btn" id="hamBtn" aria-label="Toggle menu">
+      <button class="ham-btn" id="hamBtn" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
   <!-- MOBILE NAV -->
-  <!-- FIX: removed duplicate X — only mobileClose button handles closing -->
   <div class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav__close" id="mobileClose" aria-label="Close">
+    <button class="mobile-nav__close" id="mobileClose" aria-label="Close menu">
       <i class="fas fa-times"></i>
     </button>
     <a href="#about"    onclick="closeMobileNav()">About</a>
@@ -78,12 +77,12 @@
           <div class="vscode">
             <div class="vscode__titlebar">
               <div class="vscode__dots">
-                <span class="vscode__dot vscode__dot--red"></span>
-                <span class="vscode__dot vscode__dot--yellow"></span>
-                <span class="vscode__dot vscode__dot--green"></span>
+                <span class="vscode__dot red"></span>
+                <span class="vscode__dot yellow"></span>
+                <span class="vscode__dot green"></span>
               </div>
               <div class="vscode__tabs">
-                <div class="vscode__tab vscode__tab--active">
+                <div class="vscode__tab active">
                   <i class="devicon-javascript-plain" style="color:#f0db4f;font-size:1.3rem;"></i>
                   developer.js
                 </div>
@@ -92,119 +91,109 @@
                   App.jsx
                 </div>
               </div>
-              <div class="vscode__winbtns">
-                <span>─</span><span>□</span><span>✕</span>
-              </div>
+              <div class="vscode__winbtns"><span>─</span><span>□</span><span>✕</span></div>
             </div>
 
             <div class="vscode__body">
-              <div class="vscode__activitybar">
-                <i class="fas fa-copy vscode__actbar-icon vscode__actbar-icon--active"></i>
-                <i class="fas fa-search vscode__actbar-icon"></i>
-                <i class="fas fa-code-branch vscode__actbar-icon"></i>
-                <i class="fas fa-bug vscode__actbar-icon"></i>
-                <i class="fas fa-puzzle-piece vscode__actbar-icon"></i>
+              <div class="vscode__activity">
+                <i class="fas fa-copy act-icon act-active"></i>
+                <i class="fas fa-search act-icon"></i>
+                <i class="fas fa-code-branch act-icon"></i>
+                <i class="fas fa-bug act-icon"></i>
+                <i class="fas fa-puzzle-piece act-icon"></i>
               </div>
 
               <div class="vscode__explorer">
-                <div class="vscode__explorer-title">EXPLORER</div>
-                <div class="vscode__file-tree">
-                  <div class="vscode__folder">
-                    <i class="fas fa-chevron-down vscode__chevron"></i>
-                    <i class="fas fa-folder-open" style="color:#e8c37b;font-size:1.3rem;"></i>
-                    <span>kaizey-dev</span>
-                  </div>
-                  <div class="vscode__file vscode__file--active">
-                    <i class="devicon-javascript-plain" style="color:#f0db4f;font-size:1.3rem;"></i>
-                    developer.js
-                  </div>
-                  <div class="vscode__file">
-                    <i class="devicon-react-original" style="color:#61dafb;font-size:1.3rem;"></i>
-                    App.jsx
-                  </div>
-                  <div class="vscode__file">
-                    <i class="devicon-css3-plain" style="color:#264de4;font-size:1.3rem;"></i>
-                    style.css
-                  </div>
-                  <div class="vscode__file">
-                    <i class="devicon-nodejs-plain" style="color:#68a063;font-size:1.3rem;"></i>
-                    server.js
-                  </div>
-                  <div class="vscode__file">
-                    <i class="fas fa-cog" style="color:#6d8086;font-size:1.2rem;"></i>
-                    package.json
-                  </div>
+                <div class="explorer-title">EXPLORER</div>
+                <div class="explorer-folder">
+                  <i class="fas fa-chevron-down" style="color:#555;font-size:1rem;"></i>
+                  <i class="fas fa-folder-open" style="color:#e8c37b;font-size:1.3rem;"></i>
+                  <span>kaizey-dev</span>
+                </div>
+                <div class="explorer-file active">
+                  <i class="devicon-javascript-plain" style="color:#f0db4f;font-size:1.3rem;"></i>
+                  developer.js
+                </div>
+                <div class="explorer-file">
+                  <i class="devicon-react-original" style="color:#61dafb;font-size:1.3rem;"></i>
+                  App.jsx
+                </div>
+                <div class="explorer-file">
+                  <i class="devicon-css3-plain" style="color:#264de4;font-size:1.3rem;"></i>
+                  style.css
+                </div>
+                <div class="explorer-file">
+                  <i class="devicon-nodejs-plain" style="color:#68a063;font-size:1.3rem;"></i>
+                  server.js
+                </div>
+                <div class="explorer-file">
+                  <i class="fas fa-cog" style="color:#6d8086;font-size:1.2rem;"></i>
+                  package.json
                 </div>
               </div>
 
               <div class="vscode__editor">
-                <div class="vscode__code-wrap">
-                  <div class="vscode__gutter">
+                <div class="code-wrap">
+                  <div class="gutter">
                     <span>1</span><span>2</span><span>3</span><span>4</span>
                     <span>5</span><span>6</span><span>7</span><span>8</span>
                     <span>9</span><span>10</span><span>11</span><span>12</span>
                     <span>13</span><span>14</span>
                   </div>
-                  <div class="vscode__lines">
-                    <div class="vscode__line"><span class="vc-comment">// ✦ open to new opportunities</span></div>
-                    <div class="vscode__line vscode__line--blank">&nbsp;</div>
-                    <div class="vscode__line"><span class="vc-keyword">const</span> <span class="vc-func">developer</span> <span class="vc-op">=</span> <span class="vc-muted">{</span></div>
-                    <div class="vscode__line vscode__line--hl-name">
-                      <span class="vc-indent"></span><span class="vc-prop">name</span><span class="vc-op">:</span> <span class="vc-string">"Kaizey"</span><span class="vc-muted">,</span>
+                  <div class="lines">
+                    <div class="cl"><span class="cc">// ✦ open to new opportunities</span></div>
+                    <div class="cl blank">&nbsp;</div>
+                    <div class="cl"><span class="ck">const</span> <span class="cf">developer</span> <span class="co">=</span> <span class="cm">{</span></div>
+                    <div class="cl hl-name">
+                      <span class="ci"></span><span class="cp">name</span><span class="co">:</span> <span class="cs">"Kaizey"</span><span class="cm">,</span>
                     </div>
-                    <div class="vscode__line">
-                      <span class="vc-indent"></span><span class="vc-prop">role</span><span class="vc-op">:</span> <span class="vc-string">"Full Stack Dev"</span><span class="vc-muted">,</span>
+                    <div class="cl">
+                      <span class="ci"></span><span class="cp">role</span><span class="co">:</span> <span class="cs">"Full Stack Dev"</span><span class="cm">,</span>
                     </div>
-                    <div class="vscode__line">
-                      <span class="vc-indent"></span><span class="vc-prop">stack</span><span class="vc-op">:</span> <span class="vc-muted">[</span><span class="vc-string">"React"</span><span class="vc-muted">, </span><span class="vc-string">"Node"</span><span class="vc-muted">, </span><span class="vc-string">"JS"</span><span class="vc-muted">],</span>
+                    <div class="cl">
+                      <span class="ci"></span><span class="cp">stack</span><span class="co">:</span> <span class="cm">[</span><span class="cs">"React"</span><span class="cm">, </span><span class="cs">"Node"</span><span class="cm">, </span><span class="cs">"JS"</span><span class="cm">],</span>
                     </div>
-                    <div class="vscode__line vscode__line--hl-avail">
-                      <span class="vc-indent"></span><span class="vc-prop">available</span><span class="vc-op">:</span> <span class="vc-bool">true</span><span class="vc-muted">,</span>
+                    <div class="cl hl-avail">
+                      <span class="ci"></span><span class="cp">available</span><span class="co">:</span> <span class="cb">true</span><span class="cm">,</span>
                     </div>
-                    <div class="vscode__line">
-                      <span class="vc-indent"></span><span class="vc-func">hire</span><span class="vc-muted">:</span> <span class="vc-op">()</span> <span class="vc-keyword">=&gt;</span> <span class="vc-muted">{</span>
+                    <div class="cl">
+                      <span class="ci"></span><span class="cf">hire</span><span class="cm">:</span> <span class="co">()</span> <span class="ck">=&gt;</span> <span class="cm">{</span>
                     </div>
-                    <div class="vscode__line">
-                      <span class="vc-indent2"></span><span class="vc-keyword">return</span> <span class="vc-string">"Let's build together!"</span>
+                    <div class="cl">
+                      <span class="ci2"></span><span class="ck">return</span> <span class="cs">"Let's build together!"</span>
                     </div>
-                    <div class="vscode__line"><span class="vc-indent"></span><span class="vc-muted">}</span></div>
-                    <div class="vscode__line"><span class="vc-muted">};</span></div>
-                    <div class="vscode__line vscode__line--blank">&nbsp;</div>
-                    <div class="vscode__line">
-                      <span class="vc-var">developer</span><span class="vc-muted">.</span><span class="vc-func">hire</span><span class="vc-muted">();</span>
+                    <div class="cl"><span class="ci"></span><span class="cm">}</span></div>
+                    <div class="cl"><span class="cm">};</span></div>
+                    <div class="cl blank">&nbsp;</div>
+                    <div class="cl">
+                      <span class="cv">developer</span><span class="cm">.</span><span class="cf">hire</span><span class="cm">();</span>
                     </div>
-                    <div class="vscode__line vscode__line--cursor"><span class="vc-cursor"></span></div>
+                    <div class="cl"><span class="cursor"></span></div>
                   </div>
                 </div>
 
-                <div class="vscode__terminal">
-                  <div class="vscode__terminal-tabs">
-                    <span class="vt-tab vt-tab--active">TERMINAL</span>
-                    <span class="vt-tab">OUTPUT</span>
-                    <span class="vt-tab">PROBLEMS</span>
+                <div class="terminal">
+                  <div class="terminal-tabs">
+                    <span class="ttab active">TERMINAL</span>
+                    <span class="ttab">OUTPUT</span>
+                    <span class="ttab">PROBLEMS</span>
                   </div>
-                  <div class="vscode__terminal-body">
-                    <div class="vt-line">
-                      <span class="vt-path">~/kaizey-dev</span><span class="vt-dollar"> $&nbsp;</span><span class="vt-cmd">node developer.js</span>
-                    </div>
-                    <div class="vt-line">
-                      <span class="vt-output">"Let's build together!"</span>
-                    </div>
-                    <div class="vt-line">
-                      <span class="vt-path">~/kaizey-dev</span><span class="vt-dollar"> $&nbsp;</span><span class="vt-blink">▋</span>
-                    </div>
+                  <div class="terminal-body">
+                    <div class="tl"><span class="tp">~/kaizey-dev</span><span class="td"> $&nbsp;</span><span class="tcd">node developer.js</span></div>
+                    <div class="tl"><span class="to">"Let's build together!"</span></div>
+                    <div class="tl"><span class="tp">~/kaizey-dev</span><span class="td"> $&nbsp;</span><span class="tblink">▋</span></div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="vscode__statusbar">
-              <div class="vscode__status-left">
+              <div class="sb-left">
                 <span><i class="fas fa-code-branch"></i>&nbsp;main</span>
                 <span><i class="fas fa-times-circle" style="color:#f14c4c;"></i>&nbsp;0</span>
                 <span><i class="fas fa-exclamation-triangle" style="color:#cca700;"></i>&nbsp;0</span>
               </div>
-              <div class="vscode__status-right">
+              <div class="sb-right">
                 <span>JavaScript</span>
                 <span>UTF-8</span>
                 <span>Ln 13, Col 1</span>
@@ -222,14 +211,13 @@
     <div class="container">
       <div class="about__grid">
 
-        <!-- FIX: real image with proper path (no leading space) -->
         <div class="about__img-wrap">
           <div class="about__img-box">
-            <img src="assets/kaizey.jpg" alt="Kaizey" />
+            <img src="https://subscript0.github.io/assets/kaizey.jpg" alt="Kaizey" />
           </div>
           <div class="about__badge">
-            <div class="about__badge-num">3+</div>
-            <div class="about__badge-label">Years coding</div>
+            <div class="badge-num">3+</div>
+            <div class="badge-label">Years coding</div>
           </div>
         </div>
 
@@ -239,14 +227,14 @@
           <p>I'm a <strong>Full Stack Developer</strong> who loves building products that are both technically solid and a pleasure to use. I care deeply about clean code, good architecture, and the details that make an interface feel just right.</p>
           <p>When I'm not building, I'm learning — currently exploring <strong>system design</strong>, <strong>cloud infrastructure</strong>, and <strong>open source</strong> contributions.</p>
           <div class="about__highlights">
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Clean, maintainable code</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> REST &amp; GraphQL APIs</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Database design</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> CI/CD pipelines</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Responsive UIs</div>
-            <div class="highlight-item"><i class="fas fa-check-circle"></i> Performance tuning</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> Clean, maintainable code</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> REST &amp; GraphQL APIs</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> Database design</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> CI/CD pipelines</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> Responsive UIs</div>
+            <div class="hl-item"><i class="fas fa-check-circle"></i> Performance tuning</div>
           </div>
-          <a href="#contact" class="btn-primary btn-about">Get in touch <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="btn-primary">Get in touch <i class="fas fa-arrow-right"></i></a>
         </div>
 
       </div>
@@ -262,124 +250,67 @@
         <p class="section-sub">Technologies I use to bring ideas to life — from frontend to backend.</p>
       </div>
 
-      <div class="skills__categories">
-        <button class="cat-btn active" onclick="filterSkills('all', this)">All</button>
-        <button class="cat-btn" onclick="filterSkills('frontend', this)">Frontend</button>
-        <button class="cat-btn" onclick="filterSkills('backend', this)">Backend</button>
+      <div class="skill-filters">
+        <button class="filter-btn active" onclick="filterSkills('all',this)">All</button>
+        <button class="filter-btn" onclick="filterSkills('frontend',this)">Frontend</button>
+        <button class="filter-btn" onclick="filterSkills('backend',this)">Backend</button>
       </div>
 
-      <div class="anime-skills">
-        <div class="anime-skills__label">
-          <span class="anime-skills__tag">POWER LEVELS</span>
-          <span class="anime-skills__sub">— Kaizey's jutsu scrolls unlocked —</span>
-        </div>
+      <div class="power-label">
+        <span class="power-tag">POWER LEVELS</span>
+        <span class="power-sub">— Kaizey's jutsu scrolls unlocked —</span>
+      </div>
 
-        <div class="skills__grid" id="skillsGrid">
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-react-original colored"></i></div>
-            <span class="skill-name">React</span>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-typescript-plain colored"></i></div>
-            <span class="skill-name">TypeScript</span>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div>
-            <span class="skill-name">JavaScript</span>
-            <span class="skill-level">Expert</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-nextjs-plain"></i></div>
-            <span class="skill-name">Next.js</span>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-css3-plain colored"></i></div>
-            <span class="skill-name">CSS3</span>
-            <span class="skill-level">Expert</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-tailwindcss-plain colored"></i></div>
-            <span class="skill-name">Tailwind</span>
-            <span class="skill-level">Expert</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-vuejs-plain colored"></i></div>
-            <span class="skill-name">Vue.js</span>
-            <span class="skill-level">Intermediate</span>
-          </div>
-          <div class="skill-card" data-cat="frontend">
-            <div class="skill-icon"><i class="devicon-html5-plain colored"></i></div>
-            <span class="skill-name">HTML5</span>
-            <span class="skill-level">Expert</span>
-          </div>
-          <div class="skill-card" data-cat="backend">
-            <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
-            <span class="skill-name">Node.js</span>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-card" data-cat="backend">
-            <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
-            <span class="skill-name">Python</span>
-            <span class="skill-level">Intermediate</span>
-          </div>
-          <div class="skill-card" data-cat="backend">
-            <div class="skill-icon"><i class="devicon-git-plain colored"></i></div>
-            <span class="skill-name">Git</span>
-            <span class="skill-level">Expert</span>
-          </div>
-          <div class="skill-card" data-cat="backend">
-            <div class="skill-icon"><i class="devicon-github-original"></i></div>
-            <span class="skill-name">GitHub</span>
-            <span class="skill-level">Expert</span>
-          </div>
-        </div>
+      <div class="skills__grid" id="skillsGrid">
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-react-original colored"></i></div><span class="skill-name">React</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-typescript-plain colored"></i></div><span class="skill-name">TypeScript</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div><span class="skill-name">JavaScript</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-nextjs-plain" style="color:#ccc;"></i></div><span class="skill-name">Next.js</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-css3-plain colored"></i></div><span class="skill-name">CSS3</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-tailwindcss-plain colored"></i></div><span class="skill-name">Tailwind</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-vuejs-plain colored"></i></div><span class="skill-name">Vue.js</span><span class="skill-lvl">Intermediate</span></div>
+        <div class="skill-card" data-cat="frontend"><div class="skill-icon"><i class="devicon-html5-plain colored"></i></div><span class="skill-name">HTML5</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-card" data-cat="backend"><div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div><span class="skill-name">Node.js</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-card" data-cat="backend"><div class="skill-icon"><i class="devicon-python-plain colored"></i></div><span class="skill-name">Python</span><span class="skill-lvl">Intermediate</span></div>
+        <div class="skill-card" data-cat="backend"><div class="skill-icon"><i class="devicon-git-plain colored"></i></div><span class="skill-name">Git</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-card" data-cat="backend"><div class="skill-icon"><i class="devicon-github-original" style="color:#ccc;"></i></div><span class="skill-name">GitHub</span><span class="skill-lvl">Expert</span></div>
+      </div>
 
-        <div class="anime-bars">
-          <div class="anime-bar-item">
-            <div class="anime-bar__info">
-              <span class="anime-bar__name">&#9889; Frontend Mastery</span>
-              <span class="anime-bar__rank anime-bar__rank--s">S-RANK</span>
-              <span class="anime-bar__pct">92%</span>
-            </div>
-            <div class="anime-bar__track">
-              <div class="anime-bar__fill anime-bar__fill--s" data-w="0.92"></div>
-            </div>
+      <div class="anime-bars">
+        <div class="bar-item">
+          <div class="bar-info">
+            <span class="bar-name">&#9889; Frontend Mastery</span>
+            <span class="rank s">S-RANK</span>
+            <span class="bar-pct">92%</span>
           </div>
-          <div class="anime-bar-item">
-            <div class="anime-bar__info">
-              <span class="anime-bar__name">&#128293; Backend Jutsu</span>
-              <span class="anime-bar__rank anime-bar__rank--a">A-RANK</span>
-              <span class="anime-bar__pct">78%</span>
-            </div>
-            <div class="anime-bar__track">
-              <div class="anime-bar__fill anime-bar__fill--a" data-w="0.78"></div>
-            </div>
+          <div class="bar-track"><div class="bar-fill fill-s" data-w="0.92"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-info">
+            <span class="bar-name">&#128293; Backend Jutsu</span>
+            <span class="rank a">A-RANK</span>
+            <span class="bar-pct">78%</span>
           </div>
-          <div class="anime-bar-item">
-            <div class="anime-bar__info">
-              <span class="anime-bar__name">&#128187; UI/UX Chakra</span>
-              <span class="anime-bar__rank anime-bar__rank--s">S-RANK</span>
-              <span class="anime-bar__pct">88%</span>
-            </div>
-            <div class="anime-bar__track">
-              <div class="anime-bar__fill anime-bar__fill--s" data-w="0.88"></div>
-            </div>
+          <div class="bar-track"><div class="bar-fill fill-a" data-w="0.78"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-info">
+            <span class="bar-name">&#128187; UI/UX Chakra</span>
+            <span class="rank s">S-RANK</span>
+            <span class="bar-pct">88%</span>
           </div>
-          <div class="anime-bar-item">
-            <div class="anime-bar__info">
-              <span class="anime-bar__name">&#127760; Problem Solving</span>
-              <span class="anime-bar__rank anime-bar__rank--a">A-RANK</span>
-              <span class="anime-bar__pct">82%</span>
-            </div>
-            <div class="anime-bar__track">
-              <div class="anime-bar__fill anime-bar__fill--a" data-w="0.82"></div>
-            </div>
+          <div class="bar-track"><div class="bar-fill fill-s" data-w="0.88"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-info">
+            <span class="bar-name">&#127760; Problem Solving</span>
+            <span class="rank a">A-RANK</span>
+            <span class="bar-pct">82%</span>
           </div>
+          <div class="bar-track"><div class="bar-fill fill-a" data-w="0.82"></div></div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -396,13 +327,11 @@
 
       <div class="projects__grid">
 
-        <!-- FIX: removed leading space from src=" assets/..." -->
         <div class="project-card" data-num="01">
           <div class="project-img">
-            <img src="assets/project-1.jpg" alt="DEONE CREATIVITY" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <span class="project-img__fallback">&#128640;</span>
-            <div class="project-img__overlay"></div>
-            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+            <img src="https://subscript0.github.io/assets/project-1.jpg" alt="DEONE CREATIVITY" />
+            <div class="img-overlay"></div>
+            <a href="https://deone-creativity.vercel.app/" target="_blank" class="img-hover">VIEW PROJECT &#8594;</a>
           </div>
           <div class="project-body">
             <span class="project-tag"><i class="fas fa-star"></i> Featured</span>
@@ -414,54 +343,52 @@
               <span class="stack-tag">Stripe</span>
             </div>
             <div class="project-links">
-              <a href="https://deone-creativity.vercel.app/" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="https://github.com/subscript0/Deone-Creativity.git" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://deone-creativity.vercel.app/" target="_blank" class="plink filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0/Deone-Creativity.git" target="_blank" class="plink"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
 
         <div class="project-card" data-num="02">
           <div class="project-img">
-            <img src="assets/project-2.jpg" alt="Kettle Yu Portfolio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <span class="project-img__fallback">&#127760;</span>
-            <div class="project-img__overlay"></div>
-            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+            <img src="https://subscript0.github.io/assets/project-2.jpg" alt="Kettle Yu Portfolio" />
+            <div class="img-overlay"></div>
+            <a href="https://subscript0.github.io/Kettle-Yu/" target="_blank" class="img-hover">VIEW PROJECT &#8594;</a>
           </div>
           <div class="project-body">
             <span class="project-tag">Full Stack</span>
             <h3 class="project-title">Kettle Yu Portfolio</h3>
-            <p class="project-desc">A portfolio site for a Digital Creative Designer — used to showcase his work, skills, and get hired or contacted.</p>
+            <p class="project-desc">A portfolio site for a Digital Creative Designer — built to showcase work, skills, and attract clients.</p>
             <div class="project-stack">
               <span class="stack-tag">HTML</span>
               <span class="stack-tag">CSS</span>
               <span class="stack-tag">JavaScript</span>
             </div>
             <div class="project-links">
-              <a href="https://subscript0.github.io/Kettle-Yu/" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="https://github.com/subscript0/Kettle-Yu.git" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://subscript0.github.io/Kettle-Yu/" target="_blank" class="plink filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0/Kettle-Yu.git" target="_blank" class="plink"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
 
         <div class="project-card" data-num="03">
           <div class="project-img">
-            <img src="assets/project-3.jpg" alt="NexMetrics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <span class="project-img__fallback">&#128202;</span>
-            <div class="project-img__overlay"></div>
-            <div class="project-img__hover">VIEW PROJECT &#8594;</div>
+            <img src="https://subscript0.github.io/assets/project-3.jpg" alt="NexMetrics Dashboard" />
+            <div class="img-overlay"></div>
+            <a href="https://subscript0.github.io/nexmetrics-dashboard.html" target="_blank" class="img-hover">VIEW PROJECT &#8594;</a>
           </div>
           <div class="project-body">
             <span class="project-tag">Frontend</span>
             <h3 class="project-title">NexMetrics Dashboard</h3>
-            <p class="project-desc">Data visualization dashboard aggregating metrics from multiple APIs with custom interactive chart components.</p>
+            <p class="project-desc">Data visualization dashboard with real-time charts, KPI cards, transaction tables, and an activity feed.</p>
             <div class="project-stack">
               <span class="stack-tag">Vue.js</span>
               <span class="stack-tag">Chart.js</span>
               <span class="stack-tag">FastAPI</span>
             </div>
             <div class="project-links">
-              <a href="nexmetrics-dashboard.html" target="_blank" class="project-link project-link--filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="https://github.com/subscript0" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://subscript0.github.io/nexmetrics-dashboard.html" target="_blank" class="plink filled"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/subscript0" target="_blank" class="plink"><i class="fab fa-github"></i> GitHub</a>
             </div>
           </div>
         </div>
@@ -472,163 +399,113 @@
 
   <!-- CONNECT -->
   <section class="connect" id="contact">
-
-    <div class="connect__bg">
-      <div class="connect__bg-grid"></div>
-      <div class="connect__bg-glow connect__bg-glow--left"></div>
-      <div class="connect__bg-glow connect__bg-glow--right"></div>
+    <div class="connect-bg">
+      <div class="connect-grid"></div>
+      <div class="connect-glow left"></div>
+      <div class="connect-glow right"></div>
     </div>
 
-    <div class="container connect__container">
+    <div class="container" style="position:relative;z-index:1;">
 
       <div class="connect__header">
-        <div class="connect__header-left">
-          <div class="connect__status-bar">
-            <span class="connect__status-dot"></span>
-            <span class="connect__status-text">SIGNAL ACTIVE &#8212; OPEN CHANNEL</span>
+        <div class="ch-left">
+          <div class="signal-bar">
+            <span class="signal-dot"></span>
+            <span>SIGNAL ACTIVE &#8212; OPEN CHANNEL</span>
           </div>
-          <h2 class="connect__title">
-            Initiate <span class="accent">transmission.</span>
-          </h2>
-          <p class="connect__sub">
-            Got a project, collab, or just want to talk code? Pick a channel
-            and send the signal &#8212; I respond fast.
-          </p>
+          <h2 class="connect-title">Initiate <span class="accent">transmission.</span></h2>
+          <p class="connect-sub">Got a project, collab, or just want to talk code? Pick a channel and send the signal &#8212; I respond fast.</p>
         </div>
-        <div class="connect__header-right">
-          <div class="connect__terminal-badge">
-            <span class="connect__term-line">
-              <span class="vt-path">kaizey@dev</span>
-              <span class="vt-dollar">&nbsp;~&nbsp;$&nbsp;</span>
-              <span class="vt-cmd">status --available</span>
-            </span>
-            <span class="connect__term-line connect__term-output">
-              &#10004; ready for new missions
-            </span>
-            <span class="connect__term-line">
-              <span class="vt-path">kaizey@dev</span>
-              <span class="vt-dollar">&nbsp;~&nbsp;$&nbsp;</span>
-              <span class="vt-blink">&#9611;</span>
-            </span>
+        <div class="ch-right">
+          <div class="term-badge">
+            <div class="tl"><span class="tp">kaizey@dev</span><span class="td">&nbsp;~&nbsp;$&nbsp;</span><span class="tcd">status --available</span></div>
+            <div class="tl"><span style="color:#4ec94e;padding-left:.4rem;">&#10004; ready for new missions</span></div>
+            <div class="tl"><span class="tp">kaizey@dev</span><span class="td">&nbsp;~&nbsp;$&nbsp;</span><span class="tblink">&#9611;</span></div>
           </div>
         </div>
       </div>
 
-      <div class="connect__channels">
-
-        <a href="mailto:chiemeried321@gmail.com" class="channel-card">
-          <div class="channel-card__glow"></div>
-          <div class="channel-card__top">
-            <div class="channel-card__icon"><i class="fas fa-envelope"></i></div>
-            <div class="channel-card__signal">
-              <span></span><span></span><span></span><span></span>
-            </div>
+      <div class="channels">
+        <a href="mailto:chiemeried321@gmail.com" class="ch-card">
+          <div class="ch-glow"></div>
+          <div class="ch-top">
+            <div class="ch-icon"><i class="fas fa-envelope"></i></div>
+            <div class="ch-signal"><span></span><span></span><span></span><span></span></div>
           </div>
-          <div class="channel-card__label">EMAIL</div>
-          <div class="channel-card__handle">chiemeried321@gmail.com</div>
-          <div class="channel-card__action">Send mail <i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="ch-label">EMAIL</div>
+          <div class="ch-handle">chiemeried321@gmail.com</div>
+          <div class="ch-action">Send mail <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
-
-        <a href="https://github.com/subscript0" target="_blank" class="channel-card">
-          <div class="channel-card__glow"></div>
-          <div class="channel-card__top">
-            <div class="channel-card__icon"><i class="fab fa-github"></i></div>
-            <div class="channel-card__signal">
-              <span></span><span></span><span></span><span></span>
-            </div>
+        <a href="https://github.com/subscript0" target="_blank" class="ch-card">
+          <div class="ch-glow"></div>
+          <div class="ch-top">
+            <div class="ch-icon"><i class="fab fa-github"></i></div>
+            <div class="ch-signal"><span></span><span></span><span></span><span></span></div>
           </div>
-          <div class="channel-card__label">GITHUB</div>
-          <div class="channel-card__handle">@subscript0</div>
-          <div class="channel-card__action">View repos <i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="ch-label">GITHUB</div>
+          <div class="ch-handle">@subscript0</div>
+          <div class="ch-action">View repos <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
-
-        <a href="https://wa.me/2349117564724" target="_blank" class="channel-card">
-          <div class="channel-card__glow"></div>
-          <div class="channel-card__top">
-            <div class="channel-card__icon"><i class="fab fa-whatsapp"></i></div>
-            <div class="channel-card__signal">
-              <span></span><span></span><span></span><span></span>
-            </div>
+        <a href="https://wa.me/2349117564724" target="_blank" class="ch-card">
+          <div class="ch-glow"></div>
+          <div class="ch-top">
+            <div class="ch-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="ch-signal"><span></span><span></span><span></span><span></span></div>
           </div>
-          <div class="channel-card__label">WHATSAPP</div>
-          <div class="channel-card__handle">+234 911 756 4724</div>
-          <div class="channel-card__action">Message me <i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="ch-label">WHATSAPP</div>
+          <div class="ch-handle">+234 911 756 4724</div>
+          <div class="ch-action">Message me <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
-
-        <a href="https://x.com/Indexter_1" target="_blank" class="channel-card">
-          <div class="channel-card__glow"></div>
-          <div class="channel-card__top">
-            <div class="channel-card__icon"><i class="fab fa-x-twitter"></i></div>
-            <div class="channel-card__signal">
-              <span></span><span></span><span></span><span></span>
-            </div>
+        <a href="https://x.com/Indexter_1" target="_blank" class="ch-card">
+          <div class="ch-glow"></div>
+          <div class="ch-top">
+            <div class="ch-icon"><i class="fab fa-x-twitter"></i></div>
+            <div class="ch-signal"><span></span><span></span><span></span><span></span></div>
           </div>
-          <div class="channel-card__label">TWITTER / X</div>
-          <div class="channel-card__handle">@Indexter_1</div>
-          <div class="channel-card__action">Follow <i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="ch-label">TWITTER / X</div>
+          <div class="ch-handle">@Indexter_1</div>
+          <div class="ch-action">Follow <i class="fas fa-arrow-up-right-from-square"></i></div>
         </a>
-
       </div>
 
-      <div class="connect__form-wrap">
-        <div class="connect__form-label">
-          <span class="connect__form-tag">// DIRECT TRANSMISSION</span>
+      <div class="form-wrap">
+        <div class="form-tag-label">// DIRECT TRANSMISSION</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="c-name"><span class="field-num">01</span> YOUR NAME</label>
+            <div class="field-wrap">
+              <input id="c-name" type="text" placeholder="What do they call you?" />
+              <div class="field-line"></div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="c-email"><span class="field-num">02</span> YOUR EMAIL</label>
+            <div class="field-wrap">
+              <input id="c-email" type="email" placeholder="Reply channel address" />
+              <div class="field-line"></div>
+            </div>
+          </div>
         </div>
-
-        <div class="connect__form">
-          <div class="connect__form-row">
-            <div class="connect__field">
-              <label class="connect__field-label" for="c-name">
-                <span class="connect__field-num">01</span> YOUR NAME
-              </label>
-              <div class="connect__field-wrap">
-                <input id="c-name" type="text" placeholder="What do they call you?" />
-                <div class="connect__field-line"></div>
-              </div>
-            </div>
-            <div class="connect__field">
-              <label class="connect__field-label" for="c-email">
-                <span class="connect__field-num">02</span> YOUR EMAIL
-              </label>
-              <div class="connect__field-wrap">
-                <input id="c-email" type="email" placeholder="Reply channel address" />
-                <div class="connect__field-line"></div>
-              </div>
-            </div>
+        <div class="form-field">
+          <label for="c-subject"><span class="field-num">03</span> SUBJECT</label>
+          <div class="field-wrap">
+            <input id="c-subject" type="text" placeholder="What's the mission?" />
+            <div class="field-line"></div>
           </div>
-
-          <div class="connect__field">
-            <label class="connect__field-label" for="c-subject">
-              <span class="connect__field-num">03</span> SUBJECT
-            </label>
-            <div class="connect__field-wrap">
-              <input id="c-subject" type="text" placeholder="What's the mission?" />
-              <div class="connect__field-line"></div>
-            </div>
+        </div>
+        <div class="form-field">
+          <label for="c-message"><span class="field-num">04</span> MESSAGE</label>
+          <div class="field-wrap">
+            <textarea id="c-message" placeholder="Describe your project, idea, or just say hey..."></textarea>
+            <div class="field-line"></div>
           </div>
-
-          <div class="connect__field">
-            <label class="connect__field-label" for="c-message">
-              <span class="connect__field-num">04</span> MESSAGE
-            </label>
-            <div class="connect__field-wrap">
-              <textarea id="c-message" placeholder="Describe your project, idea, or just say hey..."></textarea>
-              <div class="connect__field-line"></div>
-            </div>
-          </div>
-
-          <div class="connect__form-footer">
-            <div class="connect__form-note">
-              <i class="fas fa-shield-halved"></i>
-              Encrypted. No spam. Ever.
-            </div>
-            <button class="connect__send-btn" id="sendBtn">
-              <span class="connect__send-btn-text">
-                Transmit <i class="fas fa-satellite-dish"></i>
-              </span>
-              <div class="connect__send-btn-bg"></div>
-            </button>
-          </div>
+        </div>
+        <div class="form-footer">
+          <div class="form-note"><i class="fas fa-shield-halved"></i> Encrypted. No spam. Ever.</div>
+          <button class="send-btn" id="sendBtn">
+            <span id="sendTxt">Transmit <i class="fas fa-satellite-dish"></i></span>
+            <div class="send-shine"></div>
+          </button>
         </div>
       </div>
 
@@ -639,14 +516,14 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
-        <div class="footer__logo">Kaizey<span>.</span></div>
-        <div class="footer__links">
+        <div class="footer-logo">Kaizey<span>.</span></div>
+        <div class="footer-links">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </div>
-        <p class="footer__copy">&copy; <span id="year"></span> Kaizey. All rights reserved.</p>
+        <p class="footer-copy">&copy; <span id="year"></span> Kaizey. All rights reserved.</p>
       </div>
     </div>
   </footer>
