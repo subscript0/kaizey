@@ -1,243 +1,147 @@
-/* ═══════════════════════════════════════════════════════
-   KAIZEY — script.js  (performance-optimised)
-═══════════════════════════════════════════════════════ */
+/* KAIZEY — script.js */
 
+/* year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-
-/* ═══════════════════════════════════════════════════════
-   PARTICLE CANVAS
-   FIX: removed shadowBlur — it forces GPU layer flush
-   every single frame and is the #1 cause of canvas lag.
-   Particles now draw as plain filled circles only.
-═══════════════════════════════════════════════════════ */
-(function initParticles() {
+/* ── PARTICLES ─────────────────────────────── */
+(function(){
   const canvas = document.getElementById('particleCanvas');
-  if (!canvas) return;
+  if(!canvas) return;
   const ctx = canvas.getContext('2d');
+  let W, H, pts, raf, tmr;
 
-  let W, H, particles, rafId;
+  function r(a,b){ return a + Math.random()*(b-a); }
 
-  function resize() {
+  function resize(){
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  function rand(a, b) { return a + Math.random() * (b - a); }
-
-  function createParticles() {
-    /* Cap at 120 max — on large screens density formula
-       would create 300+ particles which tanks performance */
-    const count = Math.min(Math.floor((W * H) / 12000), 120);
-    particles = [];
-    for (let i = 0; i < count; i++) {
-      const isOrange = Math.random() < 0.18;
-      particles.push({
-        x: rand(0, W), y: rand(0, H),
-        r: rand(0.4, isOrange ? 1.8 : 1.2),
-        opacity: rand(0.12, 0.65),
-        alpha: rand(0.1, 0.6),
-        speed: rand(0.003, isOrange ? 0.018 : 0.009),
-        phase: rand(0, Math.PI * 2),
-        isOrange,
-        dx: rand(-0.05, 0.05),
-        dy: rand(-0.04, 0.04),
-      });
-    }
+  function build(){
+    const n = Math.min(Math.floor(W*H/14000), 100);
+    pts = Array.from({length:n}, ()=>{
+      const o = Math.random() < 0.18;
+      return { x:r(0,W), y:r(0,H), rad:r(0.3, o?1.6:1.1),
+               op:r(0.1,0.55), a:0, sp:r(0.003, o?0.016:0.008),
+               ph:r(0,Math.PI*2), o, dx:r(-0.04,0.04), dy:r(-0.03,0.03) };
+    });
   }
 
-  /* Pre-build colour strings so we don't allocate strings inside the loop */
-  let frame = 0;
-  function animate() {
-    rafId = requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, W, H);
-    frame++;
-
-    /* NO shadowBlur — removed entirely. It was causing a full
-       compositing layer flush on every frame = the lag you felt. */
-    for (const p of particles) {
-      p.alpha = p.opacity * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(frame * p.speed + p.phase)));
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.x < 0) p.x = W;
-      if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H;
-      if (p.y > H) p.y = 0;
-
+  let f=0;
+  function draw(){
+    raf = requestAnimationFrame(draw);
+    ctx.clearRect(0,0,W,H);
+    f++;
+    for(const p of pts){
+      p.a = p.op*(0.3+0.7*(0.5+0.5*Math.sin(f*p.sp+p.ph)));
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0) p.x=W; if(p.x>W) p.x=0;
+      if(p.y<0) p.y=H; if(p.y>H) p.y=0;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.isOrange
-        ? `rgba(255,122,0,${p.alpha.toFixed(2)})`
-        : `rgba(255,255,255,${p.alpha.toFixed(2)})`;
+      ctx.arc(p.x, p.y, p.rad, 0, Math.PI*2);
+      ctx.fillStyle = p.o
+        ? `rgba(255,122,0,${p.a.toFixed(2)})`
+        : `rgba(255,255,255,${p.a.toFixed(2)})`;
       ctx.fill();
     }
   }
 
-  resize();
-  createParticles();
-  animate();
-
-  /* Debounce resize so it doesn't fire 30x while dragging */
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      cancelAnimationFrame(rafId);
-      resize();
-      createParticles();
-      animate();
-    }, 150);
+  resize(); build(); draw();
+  window.addEventListener('resize', ()=>{
+    clearTimeout(tmr);
+    tmr = setTimeout(()=>{ cancelAnimationFrame(raf); resize(); build(); draw(); }, 200);
   });
 })();
 
-
-/* ═══════════════════════════════════════════════════════
-   DYNAMIC GLASS HEADER
-═══════════════════════════════════════════════════════ */
+/* ── GLASS HEADER ───────────────────────────── */
 const header     = document.getElementById('header');
 const headerPill = document.getElementById('headerPill');
-const THRESHOLD  = 40;
+window.addEventListener('scroll', ()=>{
+  const y = window.scrollY;
+  const p = Math.min(y/40, 1);
+  header.classList.toggle('scrolled', y > 40);
+  headerPill.style.backdropFilter       = `blur(${(p*20).toFixed(1)}px)`;
+  headerPill.style.webkitBackdropFilter = `blur(${(p*20).toFixed(1)}px)`;
+  headerPill.style.background           = `rgba(13,16,32,${(p*0.8).toFixed(2)})`;
+  headerPill.style.borderColor          = `rgba(255,255,255,${(p*0.12).toFixed(2)})`;
+  headerPill.style.boxShadow            = p > 0.05 ? `0 8px 32px rgba(0,0,10,${(p*0.45).toFixed(2)})` : 'none';
+}, {passive:true});
 
-function updateHeader() {
-  const scrollY  = window.scrollY;
-  const progress = Math.min(scrollY / THRESHOLD, 1);
-  header.classList.toggle('scrolled', scrollY > THRESHOLD);
-  const blur    = (progress * 20).toFixed(1);
-  const bgA     = (progress * 0.60).toFixed(3);
-  const bdA     = (progress * 0.12).toFixed(3);
-  const shadowA = (progress * 0.45).toFixed(2);
-  headerPill.style.backdropFilter       = `blur(${blur}px)`;
-  headerPill.style.webkitBackdropFilter = `blur(${blur}px)`;
-  headerPill.style.background           = `rgba(13,16,32,${bgA})`;
-  headerPill.style.borderColor          = `rgba(255,255,255,${bdA})`;
-  headerPill.style.boxShadow            = progress > 0.05
-    ? `0 8px 32px rgba(0,0,10,${shadowA}), inset 0 1px 0 rgba(255,255,255,${(progress*0.06).toFixed(3)})`
-    : 'none';
-}
-window.addEventListener('scroll', updateHeader, { passive: true });
-updateHeader();
+/* ── MOBILE NAV ─────────────────────────────── */
+/* The hamburger button is set to display:none when the nav
+   opens. Only the X close button inside the nav is visible.
+   This is the ONLY reliable way to prevent double-X. */
+const hamBtn     = document.getElementById('hamBtn');
+const mobileNav  = document.getElementById('mobileNav');
+const mobileClose= document.getElementById('mobileClose');
 
-
-/* ═══════════════════════════════════════════════════════
-   HAMBURGER / MOBILE NAV
-   FIX: hide ham-btn when mobile nav is open so the
-   animated X spans don't show alongside the close button.
-═══════════════════════════════════════════════════════ */
-const hamBtn    = document.getElementById('hamBtn');
-const mobileNav = document.getElementById('mobileNav');
-const mobileClose = document.getElementById('mobileClose');
-
-function openMobileNav() {
+function openNav(){
   mobileNav.classList.add('open');
-  hamBtn.classList.add('open');
-  hamBtn.style.visibility = 'hidden'; /* hide ham-btn — close btn takes over */
+  hamBtn.style.display = 'none';      /* hide ham — close btn takes over */
   document.body.style.overflow = 'hidden';
 }
-
-function closeMobileNav() {
+function closeNav(){
   mobileNav.classList.remove('open');
-  hamBtn.classList.remove('open');
-  hamBtn.style.visibility = 'visible';
+  hamBtn.style.display = '';           /* restore ham */
   document.body.style.overflow = '';
 }
 
-hamBtn.addEventListener('click', () => {
-  mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
-});
-mobileClose?.addEventListener('click', closeMobileNav);
-mobileNav.addEventListener('click', e => { if (e.target === mobileNav) closeMobileNav(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+/* expose globally so onclick="" in HTML works */
+window.closeMobileNav = closeNav;
 
+hamBtn.addEventListener('click', openNav);
+mobileClose && mobileClose.addEventListener('click', closeNav);
+mobileNav.addEventListener('click', e=>{ if(e.target===mobileNav) closeNav(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
 
-/* ═══════════════════════════════════════════════════════
-   SKILLS FILTER
-═══════════════════════════════════════════════════════ */
-function filterSkills(cat, btn) {
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+/* ── SKILLS FILTER ──────────────────────────── */
+window.filterSkills = function(cat, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  let delay = 0;
-  document.querySelectorAll('.skill-card').forEach(card => {
-    const visible = cat === 'all' || card.dataset.cat === cat;
-    if (visible) {
-      card.style.display = 'flex';
-      card.classList.remove('anime-entered');
-      setTimeout(() => card.classList.add('anime-entered'), delay);
-      delay += 40;
-    } else {
-      card.style.opacity   = '0';
-      card.style.transform = 'scale(0.8)';
-      setTimeout(() => { card.style.display = 'none'; }, 200);
-    }
+  document.querySelectorAll('.skill-card').forEach(card=>{
+    card.style.display = (cat==='all' || card.dataset.cat===cat) ? 'flex' : 'none';
   });
-}
+};
 
-/* Skill cards visible immediately — no observer needed */
-
-
-/* ═══════════════════════════════════════════════════════
-   ANIME POWER BARS
-═══════════════════════════════════════════════════════ */
-const animeBarObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const fill = entry.target;
-    const w    = parseFloat(fill.getAttribute('data-w')) || 0;
-    const items = Array.from(fill.closest('.anime-bar-item')?.parentElement?.querySelectorAll('.anime-bar-item') ?? []);
-    const delay = items.indexOf(fill.closest('.anime-bar-item')) * 180;
-    setTimeout(() => {
-      fill.style.transform = `scaleX(${w})`;
-      fill.classList.add('bar-animated');
-    }, delay);
-    animeBarObserver.unobserve(fill);
+/* ── ANIME POWER BARS ───────────────────────── */
+const barObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const fill = e.target;
+    fill.style.transform = `scaleX(${fill.getAttribute('data-w')||0})`;
+    barObs.unobserve(fill);
   });
-}, { threshold: 0.4 });
-document.querySelectorAll('.anime-bar__fill').forEach(el => animeBarObserver.observe(el));
+}, {threshold:0.3});
+document.querySelectorAll('.bar-fill').forEach(el=>barObs.observe(el));
 
-
-/* Scroll reveal removed — everything loads visible immediately */
-
-
-/* ═══════════════════════════════════════════════════════
-   SMOOTH SCROLL
-═══════════════════════════════════════════════════════ */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const id = link.getAttribute('href');
-    if (id === '#') return;
+/* ── SMOOTH SCROLL ──────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href');
+    if(!id || id==='#') return;
     const target = document.querySelector(id);
-    if (!target) return;
+    if(!target) return;
     e.preventDefault();
-    const top = target.getBoundingClientRect().top + window.scrollY - 90;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior:'smooth' });
   });
 });
 
-
-/* ═══════════════════════════════════════════════════════
-   CONTACT FORM
-═══════════════════════════════════════════════════════ */
+/* ── CONTACT FORM ───────────────────────────── */
 const sendBtn = document.getElementById('sendBtn');
-if (sendBtn) {
-  sendBtn.addEventListener('click', () => {
+const sendTxt = document.getElementById('sendTxt');
+if(sendBtn && sendTxt){
+  sendBtn.addEventListener('click', ()=>{
     const name    = document.getElementById('c-name')?.value.trim();
     const email   = document.getElementById('c-email')?.value.trim();
     const message = document.getElementById('c-message')?.value.trim();
-    const textEl  = sendBtn.querySelector('.connect__send-btn-text');
-
-    if (!name || !email || !message) {
-      textEl.textContent = 'Fill all fields ✕';
+    if(!name || !email || !message){
+      sendTxt.textContent = 'Fill all fields ✕';
       sendBtn.style.background = '#c0392b';
-      setTimeout(() => {
-        textEl.innerHTML = 'Transmit <i class="fas fa-satellite-dish"></i>';
-        sendBtn.style.background = '';
-      }, 2500);
+      setTimeout(()=>{ sendTxt.innerHTML='Transmit <i class="fas fa-satellite-dish"></i>'; sendBtn.style.background=''; }, 2500);
       return;
     }
-    textEl.innerHTML = 'Transmission sent! <i class="fas fa-check"></i>';
+    sendTxt.innerHTML = 'Sent! <i class="fas fa-check"></i>';
     sendBtn.style.background = '#1db954';
-    setTimeout(() => {
-      textEl.innerHTML = 'Transmit <i class="fas fa-satellite-dish"></i>';
-      sendBtn.style.background = '';
-    }, 3500);
+    setTimeout(()=>{ sendTxt.innerHTML='Transmit <i class="fas fa-satellite-dish"></i>'; sendBtn.style.background=''; }, 3000);
   });
 }
